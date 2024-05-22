@@ -1,0 +1,13 @@
+{
+    "node": "n8n-nodes-base.l3mbda",
+    "nodeVersion": "1.0",
+    "codexVersion": "1.0",
+    "categories": ["Development", "Developer Tools", "Utility"],
+    "resources": {
+        "primaryDocumentation": [
+            {
+                "url": "https://l3mbda.com/guides"
+            }
+        ]
+    }
+}
