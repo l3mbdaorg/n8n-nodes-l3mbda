@@ -12,12 +12,12 @@ import type {
 } from 'n8n-workflow'
 import { l3mbdaApiRequest } from './GenericFunctions'
 
-const ethFilters: INodeProperties[] = [
+const nativeFilters: INodeProperties[] = [
     {
         displayName: 'From',
         displayOptions: {
             show: {
-                event: ['eth-transfer'],
+                event: ['native-transfer'],
             },
         },
         name: 'from',
@@ -29,7 +29,7 @@ const ethFilters: INodeProperties[] = [
         displayName: 'To',
         displayOptions: {
             show: {
-                event: ['eth-transfer'],
+                event: ['native-transfer'],
             },
         },
         name: 'to',
@@ -41,7 +41,7 @@ const ethFilters: INodeProperties[] = [
         displayName: 'Min Amount',
         displayOptions: {
             show: {
-                event: ['eth-transfer'],
+                event: ['native-transfer'],
             },
         },
         name: 'amount',
@@ -213,7 +213,7 @@ export class L3mbda implements INodeType {
         version: 1,
         subtitle: '={{$parameter["event"]}}',
         description:
-            'The ultimate web3 automation platform, ranging from basic alerts, to webhooks and even serverless functions.',
+            'The ultimate web3 automation platform, ranging from basic alerts, to webhooks and serverless functions.',
         defaults: {
             name: 'L3MBDA',
             color: '#000000',
@@ -254,13 +254,13 @@ export class L3mbda implements INodeType {
                         value: 'erc1155-transfer',
                     },
                     {
-                        name: 'ETH Transfer',
-                        value: 'eth-transfer',
+                        name: 'Native Transfer',
+                        value: 'native-transfer',
                     },
                 ],
                 default: 'erc20-transfer',
             },
-            ...ethFilters,
+            ...nativeFilters,
             ...erc20Filters,
             ...erc721Filters,
             ...erc1155Filters,
@@ -303,7 +303,7 @@ export class L3mbda implements INodeType {
                     to: this.getNodeParameter('to'),
                 }
 
-                if (['eth-transfer', 'erc20-transfer'].includes(event)) {
+                if (['native-transfer', 'erc20-transfer'].includes(event)) {
                     filterData.amount = this.getNodeParameter('amount')
                 }
 
@@ -323,11 +323,11 @@ export class L3mbda implements INodeType {
                     }))
 
                 const body: IDataObject = {
-                    event: event,
-                    destination: webhookUrl,
                     name: 'N8N',
-                    action: 'webhook',
+                    description: 'N8N & L3MBDA Integration',
+                    event: event,
                     filters: filters,
+                    url: webhookUrl,
                 }
                 const webhook = await l3mbdaApiRequest.call(this, 'POST', body)
                 webhookData.oracleId = webhook.id
