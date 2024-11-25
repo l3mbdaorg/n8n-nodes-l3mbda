@@ -1,8 +1,14 @@
 {
     "name": "n8n-nodes-l3mbda",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "L3MBDA & N8N Triggers",
-    "keywords": ["n8n", "l3mbda", "automation", "n8n-nodes", "n8n-community-node-package"],
+    "keywords": [
+        "n8n",
+        "l3mbda",
+        "automation",
+        "n8n-nodes",
+        "n8n-community-node-package"
+    ],
     "license": "MIT",
     "homepage": "https://l3mbda.com",
     "author": {
@@ -18,11 +24,17 @@
         "build": "tsc && gulp build:icons",
         "dev": "tsc --watch"
     },
-    "files": ["dist"],
+    "files": [
+        "dist"
+    ],
     "n8n": {
         "n8nNodesApiVersion": 1,
-        "credentials": ["dist/credentials/Api.credentials.js"],
-        "nodes": ["dist/nodes/HttpBin/L3mbda.node.js"]
+        "credentials": [
+            "dist/credentials/Api.credentials.js"
+        ],
+        "nodes": [
+            "dist/nodes/HttpBin/L3mbda.node.js"
+        ]
     },
     "devDependencies": {
         "@biomejs/biome": "^1.7.3",
